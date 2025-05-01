@@ -2,8 +2,14 @@ import os
 import numpy as np
 import pandas as pd
 import glob
+import re
 
-file_pattern = '125Xe54Fe_Z*_1125.dat'
+print("Please input an example filename to be converter (i.e. 126Xe102Ru_Z50_1134.dat)")
+
+file_dir = input()
+file_pattern = re.sub(r'Z\d+', 'Z*', file_dir)
+
+#file_pattern = '126Xe102Ru_Z*_1134.dat'
 file_list = glob.glob(file_pattern)
 
 data_frames = []
@@ -34,8 +40,8 @@ combined_data.sort_values(by=['Z', 'N'], inplace=True)
 #output_file = 'Unified_Grazing_Output.txt'
 
 # Get the list of all files
-file_pattern = '125Xe54Fe_Z*_1125.dat'
-file_list = glob.glob(file_pattern)
+#file_pattern = '126Xe102Ru_Z*_1134.dat'
+#file_list = glob.glob(file_pattern)
 
 # Extract base name like "126Xe54Fe"
 prefix = os.path.basename(file_list[0]).split('_Z')[0]
@@ -236,8 +242,8 @@ def SortOutput():
     df.to_csv(r'./sortedoutput.csv', index=False)
 
 
-if __name__ == '__main__':
-    AllFile(output_file)
+#if __name__ == '__main__':
+    # AllFile(output_file)
     # SortOutput()
 
     # f = open("output.txt", "w")
